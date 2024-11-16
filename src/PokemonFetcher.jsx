@@ -8,19 +8,26 @@ import PokemonCard from './PokemonCard'
 //   'jigglypuff'
 // ]
 export default class PokemonFetcher extends Component {
-    constructor (props) {
-      super(props)
-      this.state = {
-        pokemonList: []
-      }
+  constructor (props) {
+    super(props)
+    this.state = {
+      pokemonList: []
     }
-    async componentDidMount () {
-        const randomPokemon = Math.ceil(Math.random() * 1025)
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemon}`)
-        const pokemon = await response.json()
-        this.setState({ pokemonList: [pokemon.name] })
-        console.log('Pokemon Fetcher Component mounted')
+  }
+
+  async componentDidMount () {
+    for (let i = 0; i < 5; i++) {
+      const randomPokemon = Math.ceil(Math.random() * 1025)
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemon}`)
+      const pokemon = await response.json()
+      this.setState((prevState) => {
+        return {
+          pokemonList: [...prevState.pokemonList, pokemon.name]
+        }
+      })
     }
+  }
+
   render () {
     return (
       <div>
