@@ -7,6 +7,10 @@ export default class PokemonCard extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    console.log('Card for Pokemon is being unloaded: ', this.state.name)
+  }
+
   render () {
     return (
         <div>
